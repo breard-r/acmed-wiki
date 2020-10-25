@@ -1,0 +1,20 @@
+name: Wiki sync
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  sync:
+    name: Sync with the upstream
+    runs-on: ubuntu-latest
+    steps:
+      - name: repo-sync
+        uses: wei/git-sync@v2
+        with:
+            source_repo: ${{ secrets.WIKI_CONTRIB_URL }}
+            source_branch: "master"
+            destination_repo: ${{ secrets.WIKI_UPSTREAM_URL }}
+            destination_branch: "master"
