@@ -7,10 +7,10 @@
 [//]: # (without any warranty.)
 
 
-# English
+## English
 
 - [Overview](Overview)
 
-# Français
+## Français
 
 - [Vue d'ensemble](Vue-d'ensemble)
