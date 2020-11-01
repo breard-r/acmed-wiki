@@ -13,7 +13,7 @@ ACMEd is a [daemon](https://en.wikipedia.org/wiki/Daemon_(computing)), which mea
 
 When started, ACMEd reads its configuration, which is where all the instructions are defined. Those instructions are divided in the following categories :
 
-- Additional configuration files to include
+- [Additional configuration files to include](Additional-configuration-files-to-include)
 - Global options
 - Endpoints and rate limits
 - Accounts

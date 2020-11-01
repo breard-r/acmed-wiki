@@ -10,7 +10,9 @@
 ## English
 
 - [Overview](Overview)
+- [Additional configuration files to include](Additional-configuration-files-to-include)
 
 ## Français
 
 - [Vue d'ensemble](Vue-d'ensemble)
+- [Fichiers de configuration à inclure](Fichiers-de-configuration-à-inclure)
