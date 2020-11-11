@@ -62,7 +62,7 @@ L'ordre n'est pas important et il est possible de spécifier plusieurs fois la m
 
 ### Utiliser les limites de débit
 
-Bien entendu, il est faut ajouter, dans la configuration d'un point d'entrée, les limites de débit qu'il se doit de respecter. Ceci se fait à l'aide de la directive `rate_limits`. En reprenant nos exemples précédent, nous obtenons donc :
+Bien entendu, il faut ajouter, dans la configuration d'un point d'entrée, les limites de débit qu'il se doit de respecter. Ceci se fait à l'aide de la directive `rate_limits`. En reprenant nos exemples précédent, nous obtenons donc :
 
 ``` toml
 [[rate-limit]]
