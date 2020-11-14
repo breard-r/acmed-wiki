@@ -2,9 +2,9 @@ name: Wiki sync
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   sync:
@@ -15,6 +15,6 @@ jobs:
         uses: wei/git-sync@v2
         with:
             source_repo: ${{ secrets.WIKI_CONTRIB_URL }}
-            source_branch: "master"
+            source_branch: "main"
             destination_repo: ${{ secrets.WIKI_UPSTREAM_URL }}
             destination_branch: "master"
