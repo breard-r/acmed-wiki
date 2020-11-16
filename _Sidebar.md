@@ -18,4 +18,5 @@
 - [Fichiers de configuration à inclure](Fichiers-de-configuration-à-inclure)
 - [Points d'entrée et limites de débit](Points-d'entrée-et-limites-de-débit)
 - [Comptes](Comptes)
+- [Certificats](Certificats)
 - [Hooks prédéfinis](Hooks-prédéfinis)

@@ -17,7 +17,7 @@ ACMEd est un [daemon](https://fr.wikipedia.org/wiki/Daemon_(informatique)), ce q
 - Options globales
 - [Points d'entrée et limites de débit](Points-d'entrée-et-limites-de-débit)
 - [Comptes](Comptes)
-- Certificats
+- [Certificats](Certificats)
 - Hooks et groupes
 
 
