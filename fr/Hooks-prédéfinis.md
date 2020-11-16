@@ -9,12 +9,12 @@
 
 De base, ACMEd inclue un fichier contenant des hooks répondant aux cas les plus généraux.
 
-| nom                   | types                                                         |
-| --------------------- | ------------------------------------------------------------- |
-| http-01-echo          | challenge-http-01 http-01-echo-clean                          |
-| tls-alpn-01-tacd-tcp  | challenge-tls-alpn-01 challenge-tls-alpn-01-clean             |
-| tls-alpn-01-tacd-unix | challenge-tls-alpn-01 challenge-tls-alpn-01-clean             |
-| git                   | file-pre-create file-pre-edit file-post-create file-post-edit |
+| Nom                   | Types                                                                    |
+| --------------------- | ------------------------------------------------------------------------ |
+| http-01-echo          | `challenge-http-01`, `http-01-echo-clean`,                               |
+| tls-alpn-01-tacd-tcp  | `challenge-tls-alpn-01`, `challenge-tls-alpn-01-clean`                   |
+| tls-alpn-01-tacd-unix | `challenge-tls-alpn-01`, `challenge-tls-alpn-01-clean`                   |
+| git                   | `file-pre-create`, `file-pre-edit`, `file-post-create`, `file-post-edit` |
 
 Ces hooks utilisent principalement des commandes shell standard. Bien qu'il ait été porté une attention particulière à la portabilité entre les systèmes d'exploitation, certains système exotiques peuvent cependant ne pas supporter certaines commandes ou options. Si un hook ne fonctionne pas correctement, regardez sa définition et comparer les commandes et options utilisées avec la documentation de votre système.
 
