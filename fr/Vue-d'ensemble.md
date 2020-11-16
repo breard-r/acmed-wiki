@@ -26,7 +26,7 @@ ACMEd est un [daemon](https://fr.wikipedia.org/wiki/Daemon_(informatique)), ce q
 Par défaut, le fichier de configuration d'ACMEd est `/etc/acmed/acmed.toml`. D'autres fichiers peuvent être inclus.
 
 Les clés privées des comptes ainsi que les données associées sont stockées dans le répertoire `/etc/acmed/accounts/`. Il est possible de définir un répertoire alternatif grâce à une directive de configuration. Dans tous les cas, ce répertoire ne doit pas etre laissé en accès libre aux utilisateurs, seul ACMEd doit y avoir accès (chmod 700).
-Dans ce répertoire, le nom des fichiers sont composés du nom du compte associé en base64 (mode protection d'URL sans remplissage) suivi par `.account.bin`. Comme le laisse supposer l'extension du fichier, ce dernier contient des données binaires et n'est donc pas prévu pour etre utilisé par un outil autre qu'ACMEd.
+Dans ce répertoire, le nom des fichiers sont composés du nom du compte associé en [base64url-nopadding](https://fr.wikipedia.org/wiki/Base64#base64url) (jeu de caractères compatible avec les URL et sans complément) suivi par `.account.bin`. Comme le laisse supposer l'extension du fichier, ce dernier contient des données binaires et n'est donc pas prévu pour etre utilisé par un outil autre qu'ACMEd.
 
 Les certificats et clés privées associées sont stockés dans le répertoire `/etc/acmed/certs/`. Il est possible de définir un répertoire alternatif grâce à une directive de configuration. Le format de fichier par défaut est `<cert_name>_<cert_key_type>.<file_type>.pem` où :
 
