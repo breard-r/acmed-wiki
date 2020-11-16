@@ -33,3 +33,8 @@ Les certificats et clés privées associées sont stockés dans le répertoire `
 - `cert_name` est le nom du certificat.
 - `cert_key_type` est le type de clé du certificat.
 - `file_type` est soit `crt` pour le certificat lui-même soit `pk` pour la clé privée.
+
+
+## Ressources
+
+- [Hooks prédéfinis](Hooks-prédéfinis)
