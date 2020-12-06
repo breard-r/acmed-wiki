@@ -11,7 +11,7 @@ Afin de pouvoir s'adapter un maximum à votre environnement, ACMEd vous donne la
 
 ## Les phases d'exécution
 
-Il n'est possible de définir des hooks pour les [comptes](Comptes) et les [certificats](Certificats). Lorsque, pour ces éléments, le processus atteint certaines phases d'exécutions, les hooks associés sont alors déclenchés. Notons que si plusieurs hooks ont été définis, ces derniers sont exécutés dans l'ordre dans lequel ils ont été déclarés.
+Il n'est possible de définir des hooks que pour les [comptes](Comptes) et les [certificats](Certificats). Lorsque, pour ces éléments, le processus atteint certaines phases d'exécutions, les hooks associés sont alors déclenchés. Notons que si plusieurs hooks ont été définis, ces derniers sont exécutés dans l'ordre dans lequel ils ont été déclarés.
 
 ### Phases des comptes
 
@@ -132,7 +132,7 @@ Les groupes sont considérés comme des hooks. À ce titre, il est possible d'in
 
 S'il est très utile de pouvoir lancer des commandes prédéfinies, ceci s'avère totalement insuffisant. En effet, s'il n'est pas possible de récupérer et utiliser des informations détaillées sur le contexte dans lequel la commande doit s'exécuter, cela ne sert a rien. Par exemple, pour résoudre un défi ACME, il est impératif de savoir de quel identifiant il s'agit, la preuve et ainsi de suite.
 
-La solution retenue qui a été retenue est d'utiliser un moteur de templates qui sera utilisé sur différents éléments avant que la commande ne soit exécutée. Le moteur de template actuellement utilisé est une ré-implémentation de [handlebars](https://handlebarsjs.com/). Les éléments qui seront interprétés par ce moteur de templates sont les paramètres de la commandes (`args`) ainsi que les entrées/sorties (`stdin`, `stdin_str`, `stdout`, et `stderr`). La commande elle-même (`cmd`) n'est pas considérée comme un template.
+La solution qui a été retenue est d'utiliser un moteur de templates qui sera utilisé sur différents éléments avant que la commande ne soit exécutée. Le moteur de template actuellement utilisé est une ré-implémentation de [handlebars](https://handlebarsjs.com/). Les éléments qui seront interprétés par ce moteur de templates sont les paramètres de la commandes (`args`) ainsi que les entrées/sorties (`stdin`, `stdin_str`, `stdout`, et `stderr`). La commande elle-même (`cmd`) n'est pas considérée comme un template.
 
 En fonction de la phase d'exécution, différentes variables sont accessibles depuis les templates.
 
