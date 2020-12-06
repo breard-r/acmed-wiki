@@ -62,7 +62,7 @@ rate_limits = ["Let's Encrypt Overall Requests limit"]
 tos_agreed = false
 
 [[endpoint]]
-name = "Let's staging"
+name = "Let's Encrypt staging"
 url = "https://acme-staging-v02.api.letsencrypt.org/directory"
 rate_limits = ["Let's Encrypt Overall Requests limit"]
 tos_agreed = false
