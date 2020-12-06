@@ -7,9 +7,9 @@
 [//]: # (without any warranty.)
 
 
-De base, ACMEd inclue un fichier contenant des hooks répondant aux cas les plus généraux.
+De base, ACMEd inclue un fichier contenant des [hooks](Hooks-et-groupes) répondant aux cas les plus généraux.
 
-| Nom                   | Types                                                                    |
+| Nom                   | Phases d'exécution                                                       |
 | --------------------- | ------------------------------------------------------------------------ |
 | http-01-echo          | `challenge-http-01`, `http-01-echo-clean`,                               |
 | tls-alpn-01-tacd-tcp  | `challenge-tls-alpn-01`, `challenge-tls-alpn-01-clean`                   |

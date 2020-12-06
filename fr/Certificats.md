@@ -12,7 +12,7 @@ Afin d'obtenir un certificat signé par une autorité de certification, il vous 
 - le [point d'entrée](Points-d'entrée-et-limites-de-débit) à utiliser ;
 - le [compte utilisateur](Comptes) à utiliser sur ce point d'entrée ;
 - les identifiants à valider (noms de domaine, adresses IP, etc) ainsi que le challenge à utiliser ;
-- les hooks utilisés pour réaliser la validation (cf. [Hooks prédéfinis](Hooks-prédéfinis)).
+- les [hooks](Hooks-et-groupes) utilisés pour répondre aux défis.
 
 
 ``` toml

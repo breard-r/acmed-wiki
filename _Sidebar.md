@@ -19,5 +19,6 @@
 - [Points d'entrée et limites de débit](Points-d'entrée-et-limites-de-débit)
 - [Comptes](Comptes)
 - [Certificats](Certificats)
+- [Hooks et groupes](Hooks-et-groupes)
 - [Hooks prédéfinis](Hooks-prédéfinis)
 - [Autorités de certification](Autorités-de-certification)
