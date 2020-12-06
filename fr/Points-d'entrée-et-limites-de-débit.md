@@ -19,6 +19,9 @@ name = "Example CA"
 url = "https://acme.example.org/dir"
 ```
 
+À titre informatif, il a été réalisé une [liste des principales autorités de certification](Autorités-de-certification) supportant le protocole ACME.
+
+
 ### Les conditions générales d'utilisation
 
 Les autorités de certification définissent des conditions générales d'utilisation (« terms of service » en anglais) qu'il convient d'accepter avant d'utiliser leurs services. Afin d'indiquer que vous avez lu et accepté ces CGU vous devez, pour le point d'entrée correspondant, définir la directive de configuration `tos_agreed` à la valeur `true`.

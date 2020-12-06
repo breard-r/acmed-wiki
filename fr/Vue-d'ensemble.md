@@ -38,3 +38,4 @@ Les certificats et clés privées associées sont stockés dans le répertoire `
 ## Ressources
 
 - [Hooks prédéfinis](Hooks-prédéfinis)
+- [Autorités de certification](Autorités-de-certification)
