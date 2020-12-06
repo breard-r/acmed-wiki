@@ -11,7 +11,7 @@ Afin de pouvoir s'adapter un maximum à votre environnement, ACMEd vous donne la
 
 ## Les phases d'exécution
 
-Il n'est possible de définir des hooks pour les [comptes](Comptes) et les [Certificats](Certificats). Lorsque, pour ces éléments, le processus atteint certaines phases d'exécutions, les hooks associés sont alors déclenchés. Notons que si plusieurs hooks ont été définis, ces derniers sont exécutés dans l'ordre dans lequel ils ont été déclarés.
+Il n'est possible de définir des hooks pour les [comptes](Comptes) et les [certificats](Certificats). Lorsque, pour ces éléments, le processus atteint certaines phases d'exécutions, les hooks associés sont alors déclenchés. Notons que si plusieurs hooks ont été définis, ces derniers sont exécutés dans l'ordre dans lequel ils ont été déclarés.
 
 ### Phases des comptes
 
