@@ -184,13 +184,15 @@ En fonction de la phase d'exécution, différentes variables sont accessibles de
 name = "http-01-example"
 type = ["challenge-http-01"]
 cmd = "echo"
-args = ["{{proof}}"]
-stdout = "{{#if env.HTTP_ROOT}}{{env.HTTP_ROOT}}{{else}}/var/www{{/if}}/{{identifier}}/.well-known/acme-challenge/{{file_name}}"
+args = ["{ proof }"]
+stdout = "{{ if env.HTTP_ROOT }}{ env.HTTP_ROOT }{{ else }}/var/www{{ endif }}/{ identifier }/.well-known/acme-challenge/{ file_name }"
 ```
 
 Ce hook utilise la commande `echo` pour, lors d'un défi http-01, écrire la preuve dans un fichier qui sera servi par le serveur web. La preuve est donc passée en paramètre de la commande et la sortie standard est redirigée vers le fichier dans lequel l'écrire.
 
-Le chemin de ce fichier de sortie est particulièrement intéressant. Tout d'abord, la partie `{{#if env.HTTP_ROOT}}{{env.HTTP_ROOT}}{{else}}/var/www{{/if}}/{{identifier}}` permet, si la variable d'environnement `HTTP_ROOT` est définie, de l'utiliser comme racine du serveur web et, dans le cas contraire, d'utiliser `/var/www`. Ensuite, la partie `/{{identifier}}` impose d'avoir un sous dossier contenant le nom de l'identifiant d'où le serveur web sert les fichiers relatifs à ce nom de domaine. Enfin, la partie `/.well-known/acme-challenge/{{file_name}}` concerne le le chemin qui sera utilisé dans l'URL.
+Le chemin de ce fichier de sortie est particulièrement intéressant. Tout d'abord, la partie `{{ if env.HTTP_ROOT }}{ env.HTTP_ROOT }{{ else }}/var/www{{ endif }}` permet, si la variable d'environnement `HTTP_ROOT` est définie, de l'utiliser comme racine du serveur web et, dans le cas contraire, d'utiliser `/var/www`. Ensuite, la partie `/{ identifier }` impose d'avoir un sous dossier contenant le nom de l'identifiant d'où le serveur web sert les fichiers relatifs à ce nom de domaine. Enfin, la partie `/.well-known/acme-challenge/{ file_name }` concerne le le chemin qui sera utilisé dans l'URL.
+
+Bon à savoir : parfois, au lieux d'utiliser un dossier au nom du domaine (par exemple `www.example.org`), les étiquettes du domaines sont mises en ordre inverse (donc, pour reprendre l'exemple précédent, `org.example.www`). Afin de gérer ces cas là, vous pouvez appliquer le formateur `rev_labels` : `{ identifier | rev_labels }`.
 
 
 ## Erreurs communes
