@@ -112,6 +112,11 @@ tos_agreed = false
 Exemple de configuration :
 
 ```
+[[account]]
+# [...]
+external_account.identifier = "ACCOUNT-KEY"
+external_account.key = "HMAC-KEY"
+
 [[endpoint]]
 name = "ZeroSSL production"
 url = "https://acme.zerossl.com/v2/DV90"
