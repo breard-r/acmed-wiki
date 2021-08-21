@@ -69,6 +69,37 @@ tos_agreed = false
 ```
 
 
+## SSL.com
+
+- Produit : [https://www.ssl.com/certificates/](https://www.ssl.com/certificates/)
+- Pays d'origine : États-Unis d'Amérique
+- Compte externe requis : oui, mais annoncé comme non
+- Documentation : [https://www.ssl.com/guide/ssl-tls-certificate-issuance-and-revocation-with-acme/](https://www.ssl.com/guide/ssl-tls-certificate-issuance-and-revocation-with-acme/)
+- Points d'entrée :
+  * Production (clé RSA) : [https://acme.ssl.com/sslcom-dv-rsa](https://acme.ssl.com/sslcom-dv-rsa)
+  * Production (clé ECDSA) : [https://acme.ssl.com/sslcom-dv-ecc](https://acme.ssl.com/sslcom-dv-ecc)
+- Limites de débit : inconnues
+
+Exemple de configuration :
+
+```
+[[account]]
+# [...]
+external_account.identifier = "ACCOUNT-KEY"
+external_account.key = "HMAC-KEY"
+
+[[endpoint]]
+name = "SSL.com DV RSA"
+url = "https://acme.ssl.com/sslcom-dv-rsa"
+tos_agreed = false
+
+[[endpoint]]
+name = "SSL.com DV ECC"
+url = "https://acme.ssl.com/sslcom-dv-ecc"
+tos_agreed = false
+```
+
+
 ## ZeroSSL
 
 - Produit : [https://zerossl.com/features/acme/](https://zerossl.com/features/acme/)
