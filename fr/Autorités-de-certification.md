@@ -36,6 +36,30 @@ tos_agreed = false
 ```
 
 
+## Google Cloud
+
+- Produit : [https://cloud.google.com/blog/products/identity-security/automate-public-certificate-lifecycle-management-via--acme-client-api](https://cloud.google.com/blog/products/identity-security/automate-public-certificate-lifecycle-management-via--acme-client-api)
+- Pays d'origine : États-Unis d'Amérique
+- Compte externe requis : oui
+- Documentation : [https://cloud.google.com/blog/products/identity-security/automate-public-certificate-lifecycle-management-via--acme-client-api](https://cloud.google.com/blog/products/identity-security/automate-public-certificate-lifecycle-management-via--acme-client-api)
+- Points d'entrée :
+  * Environnement de test : [https://dv.acme-v02.test-api.pki.goog/directory](https://dv.acme-v02.test-api.pki.goog/directory)
+  * Production : [https://dv.acme-v02.api.pki.goog/directory](https://dv.acme-v02.api.pki.goog/directory)
+- Limites de débit : inconnues
+
+```
+[[endpoint]]
+name = "Google Cloud production"
+url = "https://dv.acme-v02.api.pki.goog/directory"
+tos_agreed = false
+
+[[endpoint]]
+name = "Google Cloud test"
+url = "https://dv.acme-v02.test-api.pki.goog/directory"
+tos_agreed = false
+```
+
+
 ## Let's Encrypt
 
 - Produit : [https://letsencrypt.org/](https://letsencrypt.org/)
