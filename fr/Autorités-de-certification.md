@@ -57,7 +57,14 @@ tos_agreed = false
   * Production : [https://dv.acme-v02.api.pki.goog/directory](https://dv.acme-v02.api.pki.goog/directory)
 - Limites de débit : inconnues
 
+Exemple de configuration :
+
 ```
+[[account]]
+# [...]
+external_account.identifier = "ACCOUNT-KEY"
+external_account.key = "HMAC-KEY"
+
 [[endpoint]]
 name = "Google Cloud production"
 url = "https://dv.acme-v02.api.pki.goog/directory"
