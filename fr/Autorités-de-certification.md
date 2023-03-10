@@ -93,6 +93,49 @@ tos_agreed = false
 ```
 
 
+## Sectigo (anciennement Comodo CA)
+
+- Produit : [https://sectigo.com/resource-library/sectigos-acme-automation](https://sectigo.com/resource-library/sectigos-acme-automation)
+- Pays d'origine : États-Unis d'Amérique
+- Compte externe requis : oui
+- Documentation : [https://docs.sectigo.com/scm/sectigo-nginx-lego-certificate-management/overview.html](https://docs.sectigo.com/scm/sectigo-nginx-lego-certificate-management/overview.html)
+- Points d'entrée :
+  * Certificat DV : [https://acme.sectigo.com/v2/DV](https://acme.sectigo.com/v2/DV)
+  * Certificat OV: [https://acme.sectigo.com/v2/OV](https://acme.sectigo.com/v2/OV)
+  * Certificat EV : [https://acme.sectigo.com/v2/EV](https://acme.sectigo.com/v2/EV)
+  * Certificat OV (Geant) : [https://acme.sectigo.com/v2/GEANTOV](https://acme.sectigo.com/v2/GEANTOV)
+- Limites de débit : inconnues
+
+Exemple de configuration :
+
+```
+[[account]]
+# [...]
+external_account.identifier = "ACCOUNT-KEY"
+external_account.key = "HMAC-KEY"
+
+[[endpoint]]
+name = "Sectigo DV"
+url = "https://acme.sectigo.com/v2/DV"
+tos_agreed = false
+
+[[endpoint]]
+name = "Sectigo OV"
+url = "https://acme.sectigo.com/v2/OV"
+tos_agreed = false
+
+[[endpoint]]
+name = "Sectigo EV"
+url = "https://acme.sectigo.com/v2/EV"
+tos_agreed = false
+
+[[endpoint]]
+name = "Sectigo OV - Geant"
+url = "https://acme.sectigo.com/v2/GEANTOV"
+tos_agreed = false
+```
+
+
 ## SSL.com
 
 - Produit : [https://www.ssl.com/certificates/](https://www.ssl.com/certificates/)
