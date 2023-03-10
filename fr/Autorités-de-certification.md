@@ -36,6 +36,16 @@ tos_agreed = false
 ```
 
 
+## GoDaddy
+
+- Produit : [https://www.godaddy.com/help/set-up-my-ssl-certificate-with-acme-40393](https://www.godaddy.com/help/set-up-my-ssl-certificate-with-acme-40393)
+- Pays d'origine : États-Unis d'Amérique
+- Compte externe requis : oui
+- Documentation : [https://www.godaddy.com/help/set-up-my-ssl-certificate-with-acme-40393](https://www.godaddy.com/help/set-up-my-ssl-certificate-with-acme-40393)
+- Points d'entrée : inconnus
+- Limites de débit : inconnues
+
+
 ## Google Cloud
 
 - Produit : [https://cloud.google.com/blog/products/identity-security/automate-public-certificate-lifecycle-management-via--acme-client-api](https://cloud.google.com/blog/products/identity-security/automate-public-certificate-lifecycle-management-via--acme-client-api)
