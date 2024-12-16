@@ -3,7 +3,7 @@ Here is an example dns-01 challenge acmed.toml file:
 
 To switch to production, just change the `endpoint` line in `[[certificate]]` to `letsencrypt v2 production`.
 
-This example has backed off the Let's Encrypt published limit of 20 / sec to just 1 per sec.
+This example has backed off the Let's Encrypt published limit of 20 / sec to just 1 per minute.  It's probably worth slowing down even more as the example auth.sh script waits 30 minutes per domain for the TXT record to propagate worldwide.
 
 
 ```
@@ -72,7 +72,6 @@ rslt="`curl -s \"https://www.namesilo.com/api/dnsAddRecord?version=1&type=xml&ke
 
 # Sleep 1/2 hour for the cert to propagate
 sleep 1800
-
 ```
 
 ---
