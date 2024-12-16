@@ -13,9 +13,9 @@
 * [SSL.com](#SSL.com)
 * [ZeroSSL](#ZeroSSL)
 
-This page contains a non-exhaustive list of additional certification authorities. These are listed in alphabetical order.
+This page contains a non-exhaustive list of certification authorities in alphabetical order.
 
-The configuration examples systematically refuse the terms of use of these services. In order to use them, it is your responsibility to read these terms of use and then accept them by setting tos_agreed to true.
+All examples intentionally refuse to accept the `terms of use`. It is your responsibility to read these terms of use and then accept them by setting `tos_agreed` to true.
 
 ---
 
