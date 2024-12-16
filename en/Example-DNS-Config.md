@@ -14,7 +14,7 @@ certificates_directory = "/tmp/certs"
 [[rate-limit]]
 name = "LE min"
 number = 1
-period = "1s"
+period = "1m"
 
 [[endpoint]]
 name = "letsencrypt v2 staging"
