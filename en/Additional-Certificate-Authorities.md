@@ -13,15 +13,15 @@
 * [SSL.com](#SSL.com)
 * [ZeroSSL](#ZeroSSL)
 
-This page contains a non-exhaustive list of certification authorities in alphabetical order.
+This page contains a partial list of certification authorities in alphabetical order.
 
-All examples intentionally refuse to accept the `terms of use`. It is your responsibility to read these terms of use and then accept them by setting `tos_agreed` to true.
+All examples intentionally do not accept the `terms of use`. It is your responsibility to read the terms of use and accept them if you agree with the terms and conditions by setting `tos_agreed` to `true`.
 
 ---
 
 ## Buypass Go SSL
 
-|  | Summary |
+| * Free * | Summary |
 |--:|:--|
 | Product: | https://www.buypass.com/ssl/products/acme |
 | Country of Origin: | Norway |
@@ -95,7 +95,7 @@ tos_agreed = false
 
 ## Let's Encrypt
 
-|  | Summary |
+| * Free * | Summary |
 |--:|:--|
 | Product:| https://letsencrypt.org|
 | Country of Origin:| United States of America|
@@ -115,13 +115,13 @@ number = 20
 period = "1s"
 
 [[endpoint]]
-name = "Let's Encrypt production"
+name = "Let's Encrypt Production"
 url = "https://acme-v02.api.letsencrypt.org/directory"
 rate_limits = ["Let's Encrypt Overall Requests limit"]
 tos_agreed = false
 
 [[endpoint]]
-name = "Let's Encrypt staging"
+name = "Let's Encrypt Staging"
 url = "https://acme-staging-v02.api.letsencrypt.org/directory"
 rate_limits = ["Let's Encrypt Overall Requests limit"]
 tos_agreed = false
@@ -209,7 +209,7 @@ tos_agreed = false
 
 ## ZeroSSL
 
-|  | Summary |
+| * Free * | Summary |
 |--:|:--|
 | Product:| https://zerossl.com/features/acme/|
 | Country of Origin:| Austria|
