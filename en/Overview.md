@@ -23,7 +23,7 @@ When started, ACMEd reads its configuration, which is where all the instructions
 
 ## The files
 
-By default, ACMEd configuration file is `/etc/acmed/acmed.toml`. Other files may be included.
+By default, ACMEd configuration file is `/etc/acmed/acmed.toml`. Other files may be included. [Example acmed.toml file](Example-DNS-Config)
 
 Account private keys and related data are stored in the `/etc/acmed/accounts/` directory. It is possible to define a different directory in the configuration. In any case, this directory should not be left accessible by any user, only ACMEd should access it (chmod 700).
 In this directory, files names are the associated account's name in base64 (URL safe without padding) followed by `.account.bin`. As the extension states, those files contains binary data and are not meant to be used by a tool other than ACMEd.
