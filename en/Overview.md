@@ -15,15 +15,18 @@ When started, ACMEd reads its configuration, which is where all the instructions
 
 - [Additional configuration files to include](Additional-configuration-files-to-include)
 - Global options
-- Endpoints and rate limits
-- Accounts
-- Certificates
-- Hooks and groups
+- [Endpoints and rate limits](Endpoints.md)
+- [Accounts](Accounts.md)
+- [Certificates](Certificates.md)
+- [Hooks and groups](Hooks-And-Groups.md)
+- [Example acmed.toml config file](Example-DNS-Config.md)
 
 
 ## The files
 
 By default, ACMEd configuration file is `/etc/acmed/acmed.toml`. Other files may be included. [Example acmed.toml file](Example-DNS-Config.md)
+
+Currently there seems to still be an issue with wildcard dns challenges.
 
 Account private keys and related data are stored in the `/etc/acmed/accounts/` directory. It is possible to define a different directory in the configuration. In any case, this directory should not be left accessible by any user, only ACMEd should access it (chmod 700).
 In this directory, files names are the associated account's name in base64 (URL safe without padding) followed by `.account.bin`. As the extension states, those files contains binary data and are not meant to be used by a tool other than ACMEd.
