@@ -32,7 +32,7 @@ tos_agreed = false
 
 ### Rate Limits
 
-In order to obtain a certificate, ACMEd makes a certain number of requests to a [certificate authority's](Additional-Certificate-Auhtorities.md) ACME server. In order to avoid overloading its servers, certification authorities can refuse to respond when too many requests are initiated simultaneously. In order not to harm the certification authorities and to avoid running into these potential limits, it is possible to configure ACMEd so that it limits the rate of requests it sends to a given endpoint. This is done by defining a rate-limit section that consists of:
+In order to obtain a certificate, ACMEd makes a certain number of requests to a [certificate authority's](Additional-Certificate-Authorities.md) ACME server. In order to avoid overloading its servers, certification authorities can refuse to respond when too many requests are initiated simultaneously. In order not to harm the certification authorities and to avoid running into these potential limits, it is possible to configure ACMEd so that it limits the rate of requests it sends to a given endpoint. This is done by defining a rate-limit section that consists of:
 
 | Identifier | Description |
 | --: | :-- |
