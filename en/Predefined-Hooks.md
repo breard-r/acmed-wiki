@@ -3,7 +3,9 @@
 [//]: # (notice and this notice are preserved.  This file is offered as-is,)
 [//]: # (without any warranty.)
 
-By default, ACMEd includes a file containing hooks that address the most general cases.
+Some [hooks](Hooks-And-Groups.md) are so common, ACMEd has implemented for you.
+
+By default, ACMEd includes the following hooks which handle the most common cases.
 
 | Name | Execution phases |
 | --: | :-- |
@@ -18,12 +20,12 @@ These hooks primarily use standard shell commands. While careful attention has b
 
 ## `http-01-echo`
 
-This group contains the hooks that allow the resolution of the `http-01` challenge by writing the verification value into the file to be served by a web server. This file is written into a folder with the path `<web_root>/<identifer>/.well-known/acme-challenge/` where:
+This hook group contains the hooks that allow the resolution of the `http-01` challenge by writing the verification `proof` into the file to be served by a web server. This file is written into a folder with the path `<web_root>/<identifer>/.well-known/acme-challenge/` where:
 
 - `<web_root>` is the root directory of the web server, by default `/var/www/`
-- `<identifier>` is the identifier to validate, so the domain name, IP address, etc.
+- `<identifier>` is the identifier to validate, so the domain name or IP address.
 
-Be careful not to confuse the identifier to validate and the name of the certificate. In a certificate, you must solve a challenge by identifier and only the name of the latter counts: the name of the certificate is not used in this hook.
+Be careful not to confuse the identifier to validate and the name of the certificate. In a certificate, you must solve a challenge by identifier and only the name of the latter counts: the name of the certificate is not needed.
 
 It is possible to change the root directory of the web server by setting the environment variable `HTTP_ROOT`
 
@@ -31,9 +33,9 @@ It is possible to change the root directory of the web server by setting the env
 
 ## `tls-alpn-01-tacd-tcp`
 
-This group contains the hooks that allow the resolution of the tls-alpn-01 challenge using tacd. For each validation, a tacd server is therefore launched and then stopped once this validation is done. The tacd configuration is done using the following environment variables:
+This group contains the hooks that allow the resolution of the `tls-alpn-01` challenge using tacd. For each validation, a tacd server is therefore launched and then stopped once this validation is done. The tacd configuration is accomplished using the following environment variables:
 
-- TACD_PID_ROOT: Folder where the PID of the executable will be written. By default, /runis used.
+- TACD_PID_ROOT: Folder where the PID of the executable will be written. By default, `/run` is used.
 - TACD_HOST: Host or address on which the server should listen. The default value is the identifier to be validated.
 - TACD_PORT: The port on which the server should listen. Default is 5001.
 
