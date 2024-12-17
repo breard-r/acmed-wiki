@@ -3,63 +3,68 @@
 [//]: # (notice and this notice are preserved.  This file is offered as-is,)
 [//]: # (without any warranty.)
 
-In order to be able to adapt as much as possible to your environment, ACMEd gives you the possibility to configure the actions to be carried out in certain circumstances. To this end, ACMEd allows you to define shell commands that will be called during certain phases of its execution. These pre-configured shell commands are here called hooks.
+As computing environments vary widely, it is necessary for ACMEd to be adaptable. That is accomplished with ACMEd's ability to run shell commands or call custom scripts for any required certificate processing. In the world of ACMEd, these custom commands are called `hooks`.
 
 ---
 
-## The execution phases
+## Phases of Execution
 
-Hooks can only be defined for accounts and certificates . When, for these elements, the process reaches certain execution phases, the associated hooks are then triggered. Note that if several hooks have been defined, they are executed in the order in which they were declared.
-Accounting Phases
+Hooks can only be defined for [accounts](Accounts.md) and [certificates](Certificates.md). When, for these elements, the process reaches certain stages of execution, the associated hooks are triggered. Note that groups of hooks are executed in the order in which they were declared.
+
+### Accounting Phases
 
 In the context of accounts, the only existing execution phases are those relating to the creation and modification of the file containing the information of the account in question (name, private key, etc.).
 
-- `file-post-create`: Triggered after a file is created
-- `file-post-edit`: Triggered after a file is modified
+Before/After Creation:
 - `file-pre-create`: fires before a file is created
+- `file-post-create`: Triggered after a file is created
+
+Before/After Modification:
 - `file-pre-edit`: fires before a file is modified
+- `file-post-edit`: Triggered after a file is modified
 
 ---
 
 ## Certificate Phases
 
-For certificates, the execution phases are divided into three groups.
+Certificates are broken down into the following groups:
 
-First, the execution phases relating to the achievement of the ACME challenges.
-
-
+Before/After a DNS Challenge:
 - `challenge-dns-01`: Triggered when a DNS-01 challenge is required
 - `challenge-dns-01-clean`: fires after the remote server has successfully verified the completion of a DNS-01 challenge
+
+Before/After a HTTP Challenge:
 - `challenge-http-01`: Fires when a HTTP-01 challenge is required
 - `challenge-http-01-clean`: Fires after the remote server has successfully verified the completion of an HTTP-01 challenge
+
+Before/After a TLS Challenge:
 - `challenge-tls-alpn-01`: Triggered when a TLS-ALPN-01 challenge is required
 - `challenge-tls-alpn-01-clean`: fires after the remote server has successfully verified the completion of a TLS-ALPN-01 challenge
 
-Then, just like for accounts, there are the execution phases relating to the creation or modification of certificate files and associated private keys.
+Before/After Certificate Creation:
+- `file-pre-create`: fires before a certificate is created
+- `file-post-create`: Triggered after a certificate is created
 
-- `file-post-create`: Triggered after a file is created
-- `file-post-edit`: Triggered after a file is modified
-- `file-pre-create`: fires before a file is created
-- `file-pre-edit`: fires before a file is modified
+Before/After Certificate Modification:
+- `file-pre-edit`: fires before a certificate is modified
+- `file-post-edit`: Triggered after a certificate is modified
 
-Finally, there is a balance sheet execution phase.
-
+And the End phase:
 - `post-operation`: Triggered at the end of a certificate creation or renewal request
 
 ---
 
 ## Using hooks
 
-Since ACMEd does not perform any action by itself to respond to the challenges necessary to validate certificate identifiers, it is imperative to use hooks to respond to these challenges. Thanks to this system, ACMEd does not make any presuppositions about how your infrastructure is composed: it is you who tell it, thanks to hooks, what commands to launch in order to achieve this objective.
+Since ACMEd does not perform any action itself to pass a challenge, it is necessary that hooks perform all necessary actions to validate a certificate challenge. ACMEd's design allows for very flexible and customized actions to be taken at each step in the process.
 
-When a certificate has been renewed, you will certainly want to reload the various services that use it. This can be done via different init systems (systemd, SysV init, Upstart, etc.) or by custom means, ACMEd once again makes no presuppositions about your infrastructure and lets you define the commands to run. This hook can also be an opportunity to send a notification to the people administering the system to inform them of the progress of the operation.
+For example, after a certificate has been granted, it is usually necessary to restart the various services that utilize the certificate. ACMEd allow that to be done easily regardless of which init system is utilized: systemd, SysV init, SMF, Upstart, etc.
 
-Since keys and certificates are critical elements, many people want to save them or even archive their entire history. In some infrastructures, it is necessary to deploy certificates on other machines. It is to meet this wide variety of uses that ACMEd allows you to define hooks relating to the creation and modification of certain files.
+Below, there is even an example of sending an e-mail using sendmail when a certificate renewal is attempted.
 
-Since some usages are very widespread, ACMEd provides a configuration file, included by default, defining commonly used hooks .
-Definition of a hook
+At a minimum, a hook definition requires a name, execution phase, and command to execute.
 
-To define a hook, it is necessary to give it a name, the execution phases during which it must be triggered, the command to launch as well as any parameters of the latter. Note that the execution phases are entered in the table type.
+Example 'echo -e "Hello World!"' hook:
 
 ```
 [[hook]]
@@ -72,15 +77,14 @@ args = [
 ]
 ```
 
-This hook will therefore execute the command echo -e "Hello World!"at the end of a request to create or renew a certificate using this hook.
-
 ### Runtime error
 
-By default, when a hook command ends with a return code indicating an error, ACMEd considers that the error impacts the entire action in progress (certificate renewal) and will therefore interrupt the latter. In cases where a hook must be able to fail without impacting the entire action, it is possible to indicate allow_failure = true.
+By default, ACMEd considers any error in a hook to be critical, and therefore aborts the certificate issuance or renewal. For hooks that can fail without causing a problem, you will want to indicate that with `allow_failure = true`.
 
-### Inputs and outputs
 
-Programs have a standard input, a standard output and an error output. Hook commands are no exception and it is therefore possible to indicate, using the parameters stdin, stdoutand stderr, the path to a file on which the input or output will be connected. For the standard input, it is also possible to directly indicate a string that will be written on it using stdin_str. Of course, stdinand stdin_strare mutually exclusive.
+### StdIn / Stdout / Stderr Support
+
+ACMEd supports `stdin`, `stdout`, and `stderr` usage with its hooks. For example, it is possible to write a string to the hook command.  ACMEd also supports a `stdin_str` field specifically for strings, but it is mutually exclusive with `stdin`. Here's an example:
 
 ```
 [[hook]]
@@ -90,32 +94,20 @@ allow_failure = true
 cmd = "sed"
 args = [
     "-e",
-    "s/Ceci/Voici/",
-    "-e",
-    "s/est/une/",
+    "s/CUSTNAME/Steve/",
 ]
-stdin_str = """Ceci est
-une chaîne de caractères
-écrite sur plusieurs
-lignes.
+stdin_str = """Congrates CUSTNAME:
+Your ssl certificate is now active.
 """
-stdout = "/tmp/example-hook.txt"
+stdout = "/tmp/cust-msg.txt"
 ```
 
-The above hook reads a string as input, executes the command cat -e, and writes the contents of the standard output to the file /tmp/example-hook.txt. After the hook is executed, this file will therefore contain the following content:
+The above hook reads a string as input, executes the command sed -e, and writes the contents of the standard output to the file /tmp/cust-msg.txt.
 
-```
-Voici une
-une chaîne de caractères
-écrite sur plusieurs
-lignes.
-```
 
-### The groups
+### Hook Groups
 
-In some cases, it is necessary to run multiple commands to achieve a single goal. Each of these commands is a separate hook, so it can be tedious to define all of these commands in each account or certificate that uses them. To avoid this, it is possible to group several hooks into one by defining a group.
-
-A group is defined with a name and the list of hooks it groups. As usual, the hooks will be executed in the order in which they were defined.
+In some cases, it is helpful to run multiple hook commands instead of specialized scripts. ACMEd makes this possible by grouping hooks, which execute in the order that they are defined.
 
 ```
 [[group]]
@@ -123,18 +115,33 @@ name = "example-group"
 hooks = ["example-hook-1", "example-hook-2"]
 ```
 
-Groups are considered hooks. As such, it is possible to specify the name of a group instead of the name of a hook in an account, a certificate or even another group. If you look at the contents of the file defining the predefined hooks mentioned above, you will notice that these hooks are actually groups grouping several hooks.
+Hook Groups are considered to be just another Hook, and are called just like any other normal hook. So a Hook Group can be called just like any other hook, and a hook group can even call another hook group.
 
 ---
 
-## The execution environment
+## Hook Parameters
 
-While it is very useful to be able to run predefined commands, this is completely insufficient. Indeed, if it is not possible to retrieve and use detailed information about the context in which the command must be executed, it is useless. For example, to solve an ACME challenge, it is imperative to know what identifier it is, the proof and so on.
+ACMEd provides a programmable templating engine that allows custom processing of arguments and stdin/stdout/stderr strings. Numerous parameters can be passed in as arguments to external shell scripts or commands. This is accomplished by re-implementing the [handlebars](https://handlebarsjs.com)  template engine.
 
-The solution that was chosen is to use a template engine that will be used on different elements before the command is executed. The template engine currently used is a re-implementation of handlebars . The elements that will be interpreted by this template engine are the parameters of the command ( args) as well as the inputs/outputs ( stdin, stdin_str, stdout, and stderr). The command itself ( cmd) is not considered a template.
+### An example:
 
-Depending on the execution phase, different variables are accessible from the templates.
+```
+[[hook]]
+name = "http-01-example"
+type = ["challenge-http-01"]
+cmd = "echo"
+args = ["{ proof }"]
+stdout = "{{ if env.HTTP_ROOT }}{{ env.HTTP_ROOT }}{{ else }}/var/www{{ endif }}/{{ identifier }}/.well-known/acme-challenge/{{ file_name }}"
+```
 
+This example uses the `echo` command in an `http-01` challenge to write the `proof` string to a file presentable by the web server as the <domain.com>/.well-known/acme_challenge/<file_name> file.
+
+### Simple Processing
+
+ACMEd support simple if than statements to aid in certificate processing. In the example you can see how the env.HTTP_ROOT parameter is used if it is defined, otherwise `/var/www` is used. This processing allows for great flexibility.
+
+
+##Available parameters:
 
 ### `challenge-dns-01` And `challenge-dns-01-clean`
 
@@ -177,31 +184,22 @@ Depending on the execution phase, different variables are accessible from the te
 - `key_type` : string representing the type of asymmetric key used
 - `status` : human readable description of the operation status
 
+### Important Notes: 
 
-### Example
+The `cmd` field is not an input to the template engine.
 
-```
-[[hook]]
-name = "http-01-example"
-type = ["challenge-http-01"]
-cmd = "echo"
-args = ["{ proof }"]
-stdout = "{{ if env.HTTP_ROOT }}{ env.HTTP_ROOT }{{ else }}/var/www{{ endif }}/{ identifier }/.well-known/acme-challenge/{ file_name }"
-```
+### Reversing Paths:
 
-This hook uses the command echoto, during an http-01 challenge, write the proof to a file that will be served by the web server. The proof is therefore passed as a parameter to the command and the standard output is redirected to the file in which to write it.
-
-The path of this output file is particularly interesting. First, the part {{ if env.HTTP_ROOT }}{ env.HTTP_ROOT }{{ else }}/var/www{{ endif }}allows, if the environment variable HTTP_ROOTis defined, to use it as the root of the web server and, otherwise, to use /var/www. Then, the part /{ identifier }requires having a subfolder containing the name of the identifier from where the web server serves the files relating to this domain name. Finally, the part /.well-known/acme-challenge/{ file_name }concerns the path that will be used in the URL.
-
-Good to know: sometimes, instead of using a folder in the domain name (for example www.example.org), the domain labels are put in reverse order (so, to take the previous example, org.example.www). To handle these cases, you can apply the formatter rev_labels: { identifier | rev_labels }.
+Some web tools or organizations require domain names in reverse order:  `org.example.www` instead of `www.example.org` for example. You can use the special `rev_lables` string formatter in this case.
 
 ---
 
 ## Common Mistakes
 
-Incorrectly defined hooks are the number one cause of errors in ACMEd. Humans being human, most errors should be caused by one of the following reasons.
+Several issues are common in new instances:
 
-- Access rights: Commands are executed by ACMEd and therefore by the user who launched it. Pay attention to the user, group, rights and any ACLs.
-- Creating folders: Creating a file in a folder that does not exist will generate an error. Consider doing a mkdir -pif you expect a folder to exist.
-- Bad interface with the web server: If you are not careful, it is easy, for example for the HTTP-01 challenge, to have a difference between the path where ACMEd writes the proof and the path that will be served by the web server.
-- Collision: Since ACMEd can run multiple challenges simultaneously, including for the same identifier, it is important to ensure that the behavior of hooks cannot affect other hooks. This is especially true in "cleanup" hooks whose role is to remove evidence once the challenge has been completed.
+- Access Rights: Pay careful attention to the uid/gid of ACMEd, since hooks will be run with the same uid/gid permissions.
+- Create Folders: Writing files to non-existant folders will fail. Use `mkdir -p` if there is a chance the folder does not yet exist.
+- Folder Locations: Confirm that the files are being written to the expected location, and that the web server can server files written to that location with ACMEd's uid/gid.
+- Unique File/Folder Names: ACMEd runs multiple challenges in parallel. Make sure you're using unique file/folder names so the same files are not being overwritten by simultaneous requests.
+
