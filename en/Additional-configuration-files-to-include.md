@@ -6,6 +6,8 @@
 [//]: # (notice and this notice are preserved.  This file is offered as-is,)
 [//]: # (without any warranty.)
 
+# Additional Config Files
+
 A configuration file can include other files using the `include` directive. This directive is an array of strings representing the relative or absolute path to one or more file to include. If relative, it is relative to the configuration file which included it.
 
 Unix style globing is supported.
