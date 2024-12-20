@@ -3,6 +3,7 @@
 [//]: # (notice and this notice are preserved.  This file is offered as-is,)
 [//]: # (without any warranty.)
 
+# Certificates
 
 In order to obtain a certificate signed by a certification authority, you need to define what you want. To do this, you need to indicate, at a minimum:
 
@@ -10,8 +11,6 @@ In order to obtain a certificate signed by a certification authority, you need t
 - The [user account](user-account) to use on this entry point;
 - The [identifiers](identifiers) to validate (domain names, IP addresses, etc.) as well as the challenge to use;
 - The [hooks](hooks) used to respond to the challenges.
-
----
 
 ## Endpoints:
 
@@ -28,8 +27,6 @@ hooks = ["http-01-echo", "tls-alpn-01-tacd-tcp", "git"]
 ```
 
 In the example above, ACMEd will send the certificate signing request to the endpoint named `Example CA` using the account named `My Account`. This certificate will be valid for 3 identifiers: 2 domain names and an IP address. The domain name `example.org` and the IP address `203.0.113.1` will be validated using the http-01 challenge while the domain name `www.example.org` will be validated using the `tls-alpn-01` challenge. In order to perform these validations, the `http-01-echo` and `tls-alpn-01-tacd-tcp` hooks will be used. The git hook allows you to track the certificate files (the certificate itself and its associated private key) using git.
-
----
 
 ## Environment variables
 
@@ -52,8 +49,6 @@ env.GIT_EMAIL = "jane.doe@exemple.org"
 In this example, the root directory of the web server is used in the `http-01-echo` hook will be hosted at `/srv/http` for the domain name `example.org` and `/srv/http_bis` for the IP address `203.0.113.1`. The HTTP_ROOT defined in the ip identifier will take precedence over the more general env.HTTP_ROOT definition.
 
 Note that it is also possible to define environment variables affecting a certificate at both the global level, and the account level. Environment variables defined in a hook will only apply to that specific hook.
-
----
 
 ## Subject Attributes
 
@@ -78,8 +73,6 @@ subject_attributes.organization_name = "Example Corp."
 ```
 Certificate Authorities that embed this information should take steps to confirm the information, and therefore should be among the Certificate Authorities that require pre-registration.
 
-
----
 
 ## Useful parameters
 
