@@ -4,6 +4,7 @@
 [//]: # (notice and this notice are preserved.  This file is offered as-is,)
 [//]: # (without any warranty.)
 
+# Accounts
 In order to request a CA (Certificate Authority) to sign your certificate, you may need to first create an account with that entity. Some CAs allow you to create accounts "on the fly". In that case ACMEd will create the account for you given information in acmed.toml.  Other Certificate Authorities will require that you first create an account, and include your API credentials.
 
 This document will explain both cases.
