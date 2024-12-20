@@ -17,8 +17,6 @@ This page contains a partial list of certification authorities in alphabetical o
 
 All examples intentionally do not accept the `terms of use`. It is your responsibility to read the terms of use and accept them if you agree with the terms and conditions by setting `tos_agreed` to `true`.
 
----
-
 ## Buypass Go SSL
 
 | * Free * | Summary |
@@ -45,7 +43,6 @@ name = "Buypass Go SSL test"
 url = "https://api.test4.buypass.no/acme/directory"
 tos_agreed = false
 ```
----
 
 ## GoDaddy
 
@@ -58,7 +55,6 @@ tos_agreed = false
 | Endpoints:| Unknown|
 | Rate Limits:| Unknown|
 
----
 
 ## Google Cloud
 
@@ -91,7 +87,6 @@ name = "Google Cloud test"
 url = "https://dv.acme-v02.test-api.pki.goog/directory"
 tos_agreed = false
 ```
----
 
 ## Let's Encrypt
 
@@ -205,7 +200,6 @@ name = "SSL.com DV ECC"
 url = "https://acme.ssl.com/sslcom-dv-ecc"
 tos_agreed = false
 ```
----
 
 ## ZeroSSL
 
