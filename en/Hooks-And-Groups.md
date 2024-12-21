@@ -3,9 +3,9 @@
 [//]: # (notice and this notice are preserved.  This file is offered as-is,)
 [//]: # (without any warranty.)
 
-As computing environments vary widely, it is necessary for ACMEd to be adaptable. That is accomplished with ACMEd's ability to run shell commands or call custom scripts for any required certificate processing. In the world of ACMEd, these custom commands are called `hooks`.
+# Hooks and Groups
 
----
+As computing environments vary widely, it is necessary for ACMEd to be adaptable. That is accomplished with ACMEd's ability to run shell commands or call custom scripts for any required certificate processing. In the world of ACMEd, these custom commands are called `hooks`.
 
 ## Phases of Execution
 
@@ -22,8 +22,6 @@ Before/After Creation:
 Before/After Modification:
 - `file-pre-edit`: fires before a file is modified
 - `file-post-edit`: Triggered after a file is modified
-
----
 
 ## Certificate Phases
 
@@ -52,9 +50,7 @@ Before/After Certificate Modification:
 And the End phase:
 - `post-operation`: Triggered at the end of a certificate creation or renewal request
 
----
-
-## Using hooks
+## Using Hooks
 
 Since ACMEd does not perform any action itself to pass a challenge, it is necessary that hooks perform all necessary actions to validate a certificate challenge. ACMEd's design allows for very flexible and customized actions to be taken at each step in the process.
 
@@ -77,7 +73,7 @@ args = [
 ]
 ```
 
-### Runtime error
+### Runtime Errors
 
 By default, ACMEd considers any error in a hook to be critical, and therefore aborts the certificate issuance or renewal. For hooks that can fail without causing a problem, you will want to indicate that with `allow_failure = true`.
 
@@ -117,9 +113,7 @@ hooks = ["example-hook-1", "example-hook-2"]
 
 Hook Groups are considered to be just another Hook, and are called just like any other normal hook. So a Hook Group can be called just like any other hook, and a hook group can even call another hook group.
 
----
-
-## Hook Parameters
+## Hook Parameters and Logic Functions
 
 ACMEd provides a programmable templating engine that allows custom processing of arguments and stdin/stdout/stderr strings. Numerous parameters can be passed in as arguments to external shell scripts or commands. This is accomplished by re-implementing the [handlebars](https://handlebarsjs.com)  template engine.
 
@@ -141,7 +135,7 @@ This example uses the `echo` command in an `http-01` challenge to write the `pro
 ACMEd support simple if than statements to aid in certificate processing. In the example you can see how the env.HTTP_ROOT parameter is used if it is defined, otherwise `/var/www` is used. This processing allows for great flexibility.
 
 
-##Available parameters:
+## Available parameters:
 
 ### `challenge-dns-01` And `challenge-dns-01-clean`
 
@@ -192,7 +186,6 @@ The `cmd` field is not an input to the template engine.
 
 Some web tools or organizations require domain names in reverse order:  `org.example.www` instead of `www.example.org` for example. You can use the special `rev_lables` string formatter in this case.
 
----
 
 ## Common Mistakes
 
