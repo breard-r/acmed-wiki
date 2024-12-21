@@ -1,4 +1,6 @@
 
+# Example dns-01 config
+
 Here is an example dns-01 challenge acmed.toml file:
 
 To switch to production, just change the `endpoint` line in `[[certificate]]` to `letsencrypt v2 production`.
@@ -49,13 +51,14 @@ args = [ "{{ identifier }}", "{{ proof }}" ]
 [[certificate]]
 account = "xxx"
 endpoint = "letsencrypt v2 staging"
-domains = [{ challenge = "dns-01", dns = "*.xxx.net" }]
+domains = [{ challenge = "dns-01", dns = "*.xxx.com" },
+{ challenge = "dns-01", dns = "*.xxx.net" },]
 hooks = ["auth-dns-01-hook", "cleanup-dns-01-hook"]
+name = "mycerts"
 ```
 
----
 
-auth.sh example:
+### auth.sh example:
 
 ```
 #!/bin/bash
@@ -74,9 +77,8 @@ rslt="`curl -s \"https://www.namesilo.com/api/dnsAddRecord?version=1&type=xml&ke
 sleep 1800
 ```
 
----
 
-cleanup.sh example:
+### cleanup.sh example:
 
 ```
 #!/bin/bash
