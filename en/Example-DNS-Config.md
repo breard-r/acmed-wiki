@@ -57,6 +57,14 @@ hooks = ["auth-dns-01-hook", "cleanup-dns-01-hook"]
 name = "mycerts"
 ```
 
+Note, we're including these scripts just to help illustrate how a system might be cobbled together. It includes a few bits very rarely mentioned in the documenation, for example wildcard certificates, and even includes working API code for namesilo, a domain registrar.
+
+These example hooks require a couple of extra external packages, namely `curl` and `jq`.
+
+Please consider carefully how you provide the `<--namesilo api key-->` as it is a decision with significant ramifications. A vault system, would probably be the best, but it's rather complicated. You can also use ACMEd's environment variable system, but that may leave traces of the key everywhere the environment variables are shared. Finally, you can store them locally here with the files, but now everythings in one spot on the disk.
+
+
+
 
 ### auth.sh example:
 
@@ -73,8 +81,8 @@ dom=${wildcard#"*."}
 
 rslt="`curl -s \"https://www.namesilo.com/api/dnsAddRecord?version=1&type=xml&key=<--namesilo key-->&domain=${dom}&rrtype=TXT&rrhost=${acme}&rrvalue=${proof}&rrttl=3600\"`"
 
-# Sleep 1/2 hour for the cert to propagate
-sleep 1800
+# Sleep 15 minutes for the cert to propagate
+sleep 900
 ```
 
 
