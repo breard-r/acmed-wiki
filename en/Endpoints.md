@@ -3,7 +3,7 @@
 [//]: # (notice and this notice are preserved.  This file is offered as-is,)
 [//]: # (without any warranty.)
 
-## Endpoints
+# Endpoints
 
 In order to obtain a certificate, you must have it signed by a certification authority, which is automated by the ACME protocol. Since this protocol is standard, it can be used with many different certification authorities. It is therefore necessary to indicate in the ACMEd configuration which certification authority you wish to use. It is of course possible to use several certification authorities simultaneously as needed., each of which must sign one or more certificates.
 
@@ -17,9 +17,8 @@ url = "https://acme.cert-authority.org/dir"
 
 For information purposes, a list of the main certification authorities supporting the ACME protocol has been created.
 
----
 
-##Terms of Service
+## Terms of Service
 
 Certification authorities usually require that their terms of service be accepted before using their services. To indicate that you have read and accepted these terms and conditions, you must set the `tos_agreed` configuration directive to true for the corresponding endpoint.
 
