@@ -3,6 +3,8 @@
 [//]: # (notice and this notice are preserved.  This file is offered as-is,)
 [//]: # (without any warranty.)
 
+# Predefined Hooks
+
 Some [hooks](Hooks-And-Groups.md) are so common, ACMEd has implemented for you.
 
 By default, ACMEd includes the following hooks which handle the most common cases.
@@ -16,8 +18,6 @@ By default, ACMEd includes the following hooks which handle the most common case
 
 These hooks primarily use standard shell commands. While careful attention has been paid to portability across operating systems, some exotic systems may not support certain commands or options. If a hook does not work properly, look at its definition and compare the commands and options used with your system's documentation.
 
----
-
 ## `http-01-echo`
 
 This hook group contains the hooks that allow the resolution of the `http-01` challenge by writing the verification `proof` into the file to be served by a web server. This file is written into a folder with the path `<web_root>/<identifer>/.well-known/acme-challenge/` where:
@@ -29,8 +29,6 @@ Be careful not to confuse the identifier to validate and the name of the certifi
 
 It is possible to change the root directory of the web server by setting the environment variable `HTTP_ROOT`
 
----
-
 ## `tls-alpn-01-tacd-tcp`
 
 This group contains the hooks that allow the resolution of the `tls-alpn-01` challenge using tacd. For each validation, a tacd server is therefore launched and then stopped once this validation is done. The tacd configuration is accomplished using the following environment variables:
@@ -41,15 +39,12 @@ This group contains the hooks that allow the resolution of the `tls-alpn-01` cha
 
 Note that the PID file name is of the form `tacd_<identifiant>.pid`. If you have different certificates that contain common identifiers and these identifiers are validated with tacd, then you should specify `TACD_PID_ROOT` different values ​​for each of these certificates (example: `/run/cert_1/` and `/run/cert_2/`) to avoid two instances of tacd being launched with the same PID file.
 
----
-
 ## `tls-alpn-01-tacd-unix`
 
 Same as `tls-alpn-01-tacd-tcp` except that tacd no longer listens on a TCP interface but on a UNIX socket. The environment variables `TACD_HOST` and `TACD_PORT` are then replaced by `TACD_SOCK_ROOT` whose value determines the folder in which the UNIX socket will be created. The default value is `/run`.
 
 The UNIX socket name is `tacd_<identifiant>.sock`, which requires the same precautions to be taken as with the PID file name.
 
----
 
 ## git
 
