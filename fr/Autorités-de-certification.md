@@ -187,7 +187,7 @@ tos_agreed = false
 ## ZeroSSL
 
 - Produit : [https://zerossl.com/features/acme/](https://zerossl.com/features/acme/)
-- Pays d'origine : Autriche
+- Pays d'origine : Autriche ([filiale d'une entreprise basée aux USA](https://newsroom.hidglobal.com/hid-enhances-its-pki-offerings-acquisition-trusted-certificate-service-provider-zerossl))
 - Compte externe requis : oui
 - Documentation : [https://zerossl.com/documentation/acme/](https://zerossl.com/documentation/acme/)
 - Point d'entrée : [https://acme.zerossl.com/v2/DV90](https://acme.zerossl.com/v2/DV90)
